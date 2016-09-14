@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" ng-app="LunchCheck">
+  <head>
+    <title>Lunch Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .message {
+        font-size: 1.3em; font-weight: bold;
+       }
+       .message.colorRed {
+         color:red;border-style: solid;border-color: red;
+       }
+       .message.colorGreen {
+         color:green;border-style: solid;border-color: green;
+       }
+    </style>
+  </head>
+<body>
+   <div class="container" ng-controller="LunchCheckController">
+     <h1>Lunch Checker</h1>
+         <div class="form-group">
+           <!--
+            Note!
+            Please make sure to put a comment somewhere
+            next to the input textbox stating that you
+            do NOT consider and empty item, i.e., , ,
+            as an item towards to the count, so whoever
+            is grading your assignment doesn't erroneously mark
+            that as an error.
+            See checkIfTooMuch method for details
+          -->
+             <input ng-model="lunchMenu" id="lunch-menu" type="text"
+             placeholder="list comma separated dishes you usually have for lunch"
+             class="form-control">
+         </div>
+         <div class="form-group">
+             <button ng-click="checkIfTooMuch()" class="btn btn-default">Check If Too Much</button>
+         </div>
+         <div class="form-group message {{color}}"> {{output}}</div>
+   </div>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="scripts/app.js"></script>
+</body>
+</html>
