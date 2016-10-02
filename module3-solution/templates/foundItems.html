@@ -1,0 +1,9 @@
+<br><br><br>
+<ul>
+  <li ng-repeat="item in narrow.items">
+	{{item.name}}, {{item.short_name}}, {{item.description}}
+    <button type="button" class="btn btn-danger" 
+		ng-click="narrow.onRemove({index: $index});">Don't want this one!</button>
+  </li>
+</ul>
+<div class="error" ng-if="narrow.isEmpty()">{{narrow.errorMessage}}</div> 
