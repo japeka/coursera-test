@@ -1,0 +1,37 @@
+div.container {
+    width: 100%;
+}
+div.left {
+  width: 25%;
+  float: left;
+  display: inline-block;
+}
+div.right {
+  margin-top: -40px;
+  width: 60%;
+  display: inline-block;
+}
+
+ul
+ {
+  list-style-type: none;
+}
+
+ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+ul li a:hover {
+  text-decoration:underline;
+  color: blue;
+  font-weight: bold;
+  padding-left : 5px;
+}
+
+ul li a:active {
+  text-decoration:underline;
+  color: blue;
+  font-weight: bold;
+  padding-left : 5px;
+}

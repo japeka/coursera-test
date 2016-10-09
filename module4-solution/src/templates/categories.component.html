@@ -1,0 +1,5 @@
+<ul>
+  <li ng-repeat="item in $ctrl.items">
+    <a ui-sref="categories.menuItems({catId:item.short_name})">{{$index+1}}. {{item.name}} ({{item.short_name}})</a>
+  </li>
+</ul>
