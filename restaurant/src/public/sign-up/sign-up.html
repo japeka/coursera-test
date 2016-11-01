@@ -1,0 +1,144 @@
+<div class="container" ng-controller="SignUpController as reg">
+  <div ng-if="reg.userIsRegistered === true">
+    <h2 id="menu-categories-title" class="text-center">User Preferences</h2>
+    <div class="form-group col-sm-12">
+      <label class = "col-sm-2 control-label" for="firstname">Name:</label>
+      <div class = "col-sm-10">
+        {{reg.userPreference.firstname | uppercase}} {{reg.userPreference.lastname | uppercase}}
+      </div>
+    </div>
+
+    <div class="form-group  col-sm-12" style="margin-top:-37px;">
+      <label class = "col-sm-2 control-label" for="emailAddress">Email:</label>
+      <div class = "col-sm-10">
+        {{reg.userPreference.email}}
+      </div>
+    </div>
+    <div class="form-group  col-sm-12">
+      <label class = "col-sm-2 control-label" for="phoneNumber">Phone:</label>
+      <div class = "col-sm-10">
+        {{reg.userPreference.phone}}
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <label class = "col-sm-2 control-label" for="favoriteDish">Favorite Dish:</label>
+      <div class="col-sm-3">
+            <div class="menu-item-photo">
+              <div>{{reg.userPreference.dish.short_name}}</div>
+                <img ng-if="reg.userPreference.dish.image_present==true" class="img-responsive" width="250" height="150"
+                  ng-src="{{reg.BaseURL}}/images/{{reg.userPreference.dish.short_name}}.jpg" alt="{{reg.userPreference.dish.name}}">
+                <img ng-if="reg.userPreference.dish.image_present==false" class="img-responsive" width="250" height="150"
+                    src="http://placehold.it/250x150" alt="{{reg.userPreference.dish.name}}">
+            </div>
+      </div>
+      <div class="menu-item-description col-sm-5">
+            <h3 class="menu-item-title">{{reg.userPreference.dish.name}}</h3>
+            <p class="menu-item-details">{{reg.userPreference.dish.description}}</p>
+      </div>
+    </div>
+  </div>
+
+<div ng-if="reg.userIsRegistered === false">
+  <h2 id="menu-categories-title" class="text-center">Sign up Details</h2>
+  <div class="text-center">
+    Your signup information as well as your favorite dish should be given. Please fill in all
+    the required fields below.
+  </div>
+ <fieldset>
+  <form name='regForm' novalidate>
+    <div class="form-group col-sm-12">
+      <label class = "col-sm-2 control-label" for="firstname">First name:</label>
+      <div class = "col-sm-10">
+        <input type="text" class="form-control col-sm-10" name="firstname" placeholder="Pick a first name"
+          ng-model="reg.user.firstname"
+          required
+          minlength="2"
+          ng-maxlength="15">
+          <span ng-if="(regForm.firstname.$error.minlength || regForm.firstname.$error.required) && regForm.firstname.$touched">
+            First Name must be at least 2 characters long
+          </span>
+          <span ng-if="regForm.firstname.$error.maxlength && regForm.firstname.$touched">
+            First Name must not be longer than 15 characters
+          </span>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <label class = "col-sm-2 control-label" for="lastname">Last name:</label>
+      <div class = "col-sm-10">
+        <input type="text" class="form-control" name="lastname" placeholder="Pick a last name"
+          ng-model="reg.user.lastname"
+          required
+          minlength="2"
+          ng-maxlength="20"
+        >
+        <span ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.lastname.$touched">
+          Last name must be at least 2 characters long
+        </span>
+        <span ng-if="regForm.lastname.$error.maxlength && regForm.lastname.$touched">
+          Last name must not be longer than 20 characters
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group  col-sm-12">
+      <label class = "col-sm-2 control-label" for="emailAddress">Email:</label>
+      <div class = "col-sm-10">
+        <input type="email" class="form-control" name="emailAddress" placeholder="Pick an email address"
+        ng-model="reg.user.email"
+        required
+        >
+        <span ng-if="regForm.emailAddress.$invalid && regForm.emailAddress.$touched">
+          Must be a valid email address: handle@domain format
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group  col-sm-12">
+      <label class = "col-sm-2 control-label" for="phoneNumber">Phone:</label>
+      <div class = "col-sm-10">
+        <input type="tel" class="form-control" name="phoneNumber" placeholder="Phone ###-###-####"
+        ng-model="reg.user.phone"
+        pattern="(\d{3})-(\d{3})-(\d{4})"
+        required
+        >
+        <span ng-if="regForm.phoneNumber.$invalid && regForm.phoneNumber.$touched">
+          Phone must be in the format ###-###-####.
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group  col-sm-12">
+      <label class = "col-sm-2 control-label" for="favoriteDish">Favorite Dish:</label>
+      <div class = "col-sm-10">
+        <input type="text" class="form-control" name="favoriteDish" placeholder="Pick a favorite dish"
+        ng-model="reg.user.favoriteDish"
+        required
+        minlength="2"
+        ng-maxlength="4"
+        >
+        <span ng-if="(regForm.favoriteDish.$error.minlength || regForm.favoriteDish.$error.required) && regForm.favoriteDish.$touched">
+          Favorite Dish must be at least 2 characters long
+        </span>
+        <span ng-if="regForm.favoriteDish.$error.maxlength && regForm.favoriteDish.$touched">
+            Favorite Dish must not be longer than 4 characters
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class = "col-sm-12 text-center">
+        <button type="submit" class="btn btn-lg btn-primary"
+         ng-disabled="regForm.$invalid" ng-click="reg.submit()">Submit</button>
+         <span style="padding-left:4px;"> Valid: {{ regForm.$valid.toString() | uppercase}}<span>
+      </div>
+    </div>
+  </form>
+</fieldset>
+
+<div id="info" ng-if="reg.completed">
+  {{reg.completedMessage}}
+</div>
+</div>
+</div>
